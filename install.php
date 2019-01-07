@@ -64,3 +64,23 @@ if (sizeof($sql->getArray("SELECT id FROM " . rex::getTable('yform_table') . " W
         print rex_view::error($e->getMessage());
     }
 }
+
+if (sizeof($sql->getArray("SELECT id FROM " . rex::getTable('yform_field') . " WHERE table_name='rex_kunden'")) <= 0) {
+    try {
+        $sql = rex_sql::factory();
+        rex_sql_util::importDump($this->getPath('dump/yform_field_kunden.sql'));
+    } catch (rex_sql_exception $e) {
+        rex_logger::logException($e);
+        print rex_view::error($e->getMessage());
+    }
+}
+
+if (sizeof($sql->getArray("SELECT id FROM " . rex::getTable('yform_field') . " WHERE table_name='rex_kunden_rechnungen'")) <= 0) {
+    try {
+        $sql = rex_sql::factory();
+        rex_sql_util::importDump($this->getPath('dump/yform_field_kunden_rechnungen.sql'));
+    } catch (rex_sql_exception $e) {
+        rex_logger::logException($e);
+        print rex_view::error($e->getMessage());
+    }
+}
