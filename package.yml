@@ -1,0 +1,31 @@
+package: kundenverwaltung
+version: '0.1.0'
+author: greatif
+supportpage: https://greatif.de
+
+page:
+    title: 'Kundenverwaltung'
+    icon: rex-icon fa-edit
+    perm: admin
+    subpages:
+        kundendaten:
+            title: 'Kundendaten'
+            icon: rex-icon fa-pencil
+            subPath: pages/data_edit.php
+            yformTable: rex_kunden
+            yformClass: kunden-yform
+        rechnungsdaten:
+            title: 'Rechnungsdatendaten'
+            icon: rex-icon fa-pencil
+            subPath: pages/data_edit.php
+            yformTable: rex_kunden_rechnungen
+            yformClass: kunden_rechnungen-yform
+        hilfe:
+            title: 'Hilfe'
+            icon: rex-icon fa-info
+            subPath: pages/hilfe.php
+
+requires:
+    packages:
+        yform: '>=2.3'
+    redaxo: '^5.6.0'
