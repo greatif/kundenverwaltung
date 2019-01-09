@@ -13,10 +13,6 @@ $form = $yform->getForm();
 if ($yform->objparams['actions_executed']) {
     try {
 		$table_names = array("rex_kunden","rex_kunden_rechnungen");
-		$tablenames = implode('_', $table_names);
-		if (strlen($tablenames) > 100) {
-			$tables = substr($tablenames, 0, 100).'_etc_';
-		}
 
 		# Export Tabellenstrukturen - .JSON
 		# $fileName = 'kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.json';
