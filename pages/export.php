@@ -3,8 +3,6 @@
 $_csrf_key = 'tableset_export';
 $page = rex_request('page', 'string', '');
 
-$tables = rex_sql::factory()->getTables();
-
 $yform = new rex_yform();
 $yform->setHiddenField('page', $page);
 $yform->setObjectparams('real_field_names', true);
@@ -16,25 +14,29 @@ if ($yform->objparams['actions_executed']) {
     try {
 		$table_names = array("rex_kunden","rex_kunden_rechnungen");
 		$tablenames = implode('_', $table_names);
-        if (strlen($tablenames) > 100) {
-            $tables = substr($tablenames, 0, 100).'_etc_';
-        }
+		if (strlen($tablenames) > 100) {
+			$tables = substr($tablenames, 0, 100).'_etc_';
+		}
 
-		$fileName = 'kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.json';
-
-        $fileContent = rex_yform_manager_table_api::exportTablesets($table_names);
-		# $fileContent = rex_backup::exportDb($fileName, $tables);
-
-		# print_r($tables);
-		# print_r($fileContent);
+		# Export Tabellenstrukturen - .JSON
+		# $fileName = 'kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.json';
+		# $fileContent = rex_yform_manager_table_api::exportTablesets($table_names);
+		# header('Content-Disposition: attachment; filename="' . $fileName . '"; charset=utf-8');
+		# rex_response::sendContent($fileContent, 'application/octetstream');
 		
-        header('Content-Disposition: attachment; filename="' . $fileName . '"; charset=utf-8');
-        rex_response::sendContent($fileContent, 'application/octetstream');
-        exit;
+		# Export Tabellenstrukturen und Inhalt - .SQL
+		$fileName = 'kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.sql';
+		$fileContent = rex_backup::exportDb($fileName, $table_names);
+		$header = 'plain/text';
+		rex_response::sendFile($fileName, $header, 'attachment');
+		
+		# print_r($fileContent);
 
-    } catch (Exception $e) {
-        echo rex_view::warning($this->msg('table_export_failed', '', $e->getMessage()));
-    }
+		exit;
+
+	} catch (Exception $e) {
+		echo rex_view::warning($this->msg('table_export_failed', '', $e->getMessage()));
+	}
 }
 
 $fragment = new rex_fragment();
