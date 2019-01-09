@@ -20,6 +20,10 @@ page:
             subPath: pages/data_edit.php
             yformTable: rex_kunden_rechnungen
             yformClass: kunden_rechnungen-yform
+        export:
+            title: 'Export'
+            icon: rex-icon fa-file-export
+            subPath: pages/export.php
         hilfe:
             title: 'Hilfe'
             icon: rex-icon fa-info
