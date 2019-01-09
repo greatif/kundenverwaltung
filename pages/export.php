@@ -2,7 +2,9 @@
 
 $_csrf_key = 'tableset_export';
 $page = rex_request('page', 'string', '');
-			
+
+$tables = rex_sql::factory()->getTables();
+
 $yform = new rex_yform();
 $yform->setHiddenField('page', $page);
 $yform->setObjectparams('real_field_names', true);
@@ -13,14 +15,19 @@ $form = $yform->getForm();
 if ($yform->objparams['actions_executed']) {
     try {
 		$table_names = array("rex_kunden","rex_kunden_rechnungen");
-        $fileContent = rex_yform_manager_table_api::exportTablesets($table_names);
-
-        $tablenames = implode('_', $table_names);
+		$tablenames = implode('_', $table_names);
         if (strlen($tablenames) > 100) {
             $tables = substr($tablenames, 0, 100).'_etc_';
         }
 
-        $fileName = 'kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.json';
+		$fileName = 'kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.json';
+
+        $fileContent = rex_yform_manager_table_api::exportTablesets($table_names);
+	# $fileContent = rex_backup::exportDb($fileName, $tables);
+
+	# print_r($tables);
+	# print_r($fileContent);
+		
         header('Content-Disposition: attachment; filename="' . $fileName . '"; charset=utf-8');
         rex_response::sendContent($fileContent, 'application/octetstream');
         exit;
