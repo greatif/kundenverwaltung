@@ -25,6 +25,7 @@ if ($yform->objparams['actions_executed']) {
 		$fileContent = rex_backup::exportDb($fileName, $table_names);
 		$header = 'plain/text';
 		rex_response::sendFile($fileName, $header, 'attachment');
+		rex_file::delete($fileName);
 		
 		# print_r($fileContent);
 
