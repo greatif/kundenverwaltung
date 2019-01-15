@@ -20,6 +20,10 @@ page:
             subPath: pages/data_edit.php
             yformTable: rex_kunden_rechnungen
             yformClass: kunden_rechnungen-yform
+        rechnung:
+            title: 'Rechnung als PDF ausgeben'
+            icon: rex-icon fa-file-pdf-o
+            subPath: pages/rechnungtopdf.php
         export:
             title: 'Export'
             icon: rex-icon fa-download
