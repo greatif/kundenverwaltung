@@ -3,11 +3,12 @@
 $_csrf_key = 'rechnungsausgabe';
 $page = rex_request('page', 'string', '');
 
-	$rechnungen = rex_sql::factory()->getArray('SELECT id, billnumber, customernumber, date, articles, invoiceamount, status FROM rex_kunden_rechnungen ORDER BY id DESC');
+	$rechnungen = rex_sql::factory()->getArray('SELECT id, billnumber, ordernumber, customernumber, date, articles, invoiceamount, status FROM rex_kunden_rechnungen ORDER BY id DESC');
 	if (count($rechnungen)) {
         foreach ($rechnungen as $rechnung) {
 			$rechnungsnummer = $rechnung['billnumber'];
-			$rechnungsdatum = date('d.m.y', strtotime($rechnung['date']));
+			$rechnungsdatum = date('d.m.Y', strtotime($rechnung['date']));
+			$auftragsnummer = $rechnung['ordernumber'];
 			$kundennummer = $rechnung['customernumber'];
 			$kundendaten = rex_sql::factory()->getArray("SELECT * FROM rex_kunden WHERE customernumber = '$kundennummer'");
 			foreach ($kundendaten as $kunde) {
@@ -28,30 +29,49 @@ if ($yform->objparams['actions_executed']) {
     try {
 
 	//PDF-Generierung
-	$pdf = new FPDF();
+	$pdf = new FPDF('P','mm','A4');
+	define('EURO', chr(128) );
 		class PDF extends FPDF
 		{
-			// Page header
+			// page header
 			function Header()
 			{
 				// Logo
-				$this->Image(rex_path::media('greatif.png'),10,6,30);
-				// Arial bold 15
-				$this->SetFont('Arial','B',15);
+				// $this->Image(rex_path::media('[LOGO].png'),145,6,25);
+				// Schrift
+				$this->SetFont('Arial','B',11);
 				// Move to the right
-				$this->Cell(80);
+				$this->Cell(125,18,'',0,1);
+				$this->Cell(125,6,'',0,0);
 				// Title
-				$this->Cell(30,10,'Firmenname',1,0,'C');
-				// Line break
-				$this->Ln(20);
+				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', 'Firmenname'),0,1,'');
+				$this->SetFont('Arial','B',9);
+				$this->Cell(125,6,'',0,0);
+				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', 'Straße'),0,1,'');
+				$this->Ln(-2);
+				$this->Cell(125,6,'',0,0);
+				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', 'PLZ und Ort'),0,1,'');
+				$this->Ln(-1);
+				$this->Cell(125,6,'',0,0);
+				$this->Cell(15,6,iconv('UTF-8', 'windows-1252', 'Tel.:'),0,0,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', '0815 / 4711'),0,1,'');
+				$this->Ln(-2);
+				$this->Cell(125,6,'',0,0);
+				$this->Cell(15,6,iconv('UTF-8', 'windows-1252', 'E-Mail:'),0,0,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'kontakt@mail.de'),0,1,'');
+				$this->Ln(-2);
+				$this->Cell(125,6,'',0,0);
+				$this->Cell(15,6,iconv('UTF-8', 'windows-1252', 'Internet:'),0,0,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'https://github.com/greatif'),0,1,'');
+				$this->Ln(1);
 			}
 			// Page footer
 			function Footer()
 			{
 				// Position at 1.5 cm from bottom
 				$this->SetY(-15);
-				// Arial italic 8
-				$this->SetFont('Arial','I',8);
+				// Schrift
+				$this->SetFont('Arial','',8);
 				// Page number
 				$this->Cell(0,10,'Seite '.$this->PageNo().'/{nb}',0,0,'C');
 			}
@@ -60,18 +80,36 @@ if ($yform->objparams['actions_executed']) {
 		// Instanciation of inherited class
 		$pdf = new PDF();
 		$pdf->AliasNbPages();
+		$pdf->SetLeftMargin(20);
 		$pdf->AddPage();
-		$pdf->SetFont('Times','',12);
-		$pdf->Cell(0,10,'Datum : '.$rechnungsdatum,0,1);
-		$pdf->Cell(0,10,'Rechnung Nr. : '.$rechnungsnummer,0,1);
-		$pdf->Cell(0,10,'Kunden Nr. : '.$kundennummer,0,1);
-		$pdf->Cell(0,10,'Kunde : '.$kundenname,0,1);
-		$pdf->Cell(0,10,'Artikel : '.$artikel,0,1);		
+		$pdf->SetFont('Arial','BU',7);
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', 'Firmenname - Straße - PLZ und Ort'),0,0);
+		$pdf->SetFont('Arial','B',9);
+		$pdf->Cell(40,6,$rechnungsdatum,0,1,'');
+		$pdf->SetFont('Arial','',11);
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kundenname),0,1);
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['street']),0,1);
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['postcode'].' '.$kunde['city']),0,1);
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['country']),0,1);		
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial','B',11);
+		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Rechnung Nr. :'),0,0);
+		$pdf->Cell(0,6,$rechnungsnummer,0,1);
+		$pdf->Ln(-2);
+		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Auftrag Nr. :'),0,0);
+		$pdf->Cell(0,6,$auftragsnummer,0,1);
+		$pdf->Ln(-2);
+		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Kundennr. :'),0,0);		
+		$pdf->Cell(0,6,$kundennummer,0,1);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial','',11);		
+		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', $artikel),0,1);
+		$pdf->Ln(5);		
 		
 		// WICHTIG
 		ob_end_clean();
 
-		$pdf->Output();
+		$pdf->Output("I", "Rechnung_".$rechnungsnummer.".pdf");
 
 		exit;
 
