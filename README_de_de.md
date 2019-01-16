@@ -3,6 +3,15 @@ Das AddOn stellt eine einfache Kundenverwaltung zur Verfügung.
 
 ![kundenverwaltung](IMG.png)
 
+## Funktionen
+- Erfassung sämtlicher Kundendaten und Rechnungen
+- Kunden und Rechnungen lässt sich ein Status zuordnen
+- Rechnungen werden Kunden automatisch zugeordnet
+- Umfang der erfassten Daten über YForm individuell erweiterbar
+- Suchfunktion
+- PDF-Ausgabe für Rechnungen
+- Exportfunktion für Kundendaten und Rechnungen
+
 ## Voraussetzungen
 
 - YForm 3.0
