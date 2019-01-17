@@ -90,7 +90,7 @@ if ($yform->objparams['actions_executed']) {
 		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kundenname),0,1);
 		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['street']),0,1);
 		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['postcode'].' '.$kunde['city']),0,1);
-		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['country']),0,1);		
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['country']),0,1);
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','B',11);
 		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Rechnung Nr. :'),0,0);
@@ -99,12 +99,27 @@ if ($yform->objparams['actions_executed']) {
 		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Auftrag Nr. :'),0,0);
 		$pdf->Cell(0,6,$auftragsnummer,0,1);
 		$pdf->Ln(-2);
-		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Kundennr. :'),0,0);		
+		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Kundennr. :'),0,0);
 		$pdf->Cell(0,6,$kundennummer,0,1);
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial','B',11);	
+		$pdf->SetFillColor(225, 225, 225);
+		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Leistungen / Artikel'),1,1,'',1);
+		$pdf->SetFont('Arial','',11);
+		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', $artikel),1,1);
+		$pdf->SetFont('Arial','B',11);	
+		$pdf->SetFillColor(225, 225, 225);
+		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Rechnungsbetrag'),'UBL',0,'',1);
+		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', '€ ').$rechnung['invoiceamount'],'UBR',1,'R',1);
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial','',9);		
+		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'HINWEISE:'),0,1);
+		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Bitte beachten Sie, dass für Artikel, die auf Ihren Vorgaben basierend produziert werden, kein Widerrufsrecht besteht.'),0,1);
+		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Soweit nicht anders angegeben, entspricht das Liefer-/Leistungsdatum dem Rechnungsdatum.'),0,1);
+		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Gemäß § 19 Abs. 1 UStG wird keine Umsatzsteuer ausgewiesen.'),0,1);
 		$pdf->Ln(5);
-		$pdf->SetFont('Arial','',11);		
-		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', $artikel),0,1);
-		$pdf->Ln(5);		
+		$pdf->SetFont('Arial','B',9);
+		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Wir bedanken uns für Ihren Auftrag!'),0,1);
 		
 		// WICHTIG
 		ob_end_clean();
