@@ -69,11 +69,20 @@ if ($yform->objparams['actions_executed']) {
 			function Footer()
 			{
 				// Position at 1.5 cm from bottom
-				$this->SetY(-15);
+				$this->SetY(-25);
 				// Schrift
 				$this->SetFont('Arial','',8);
-				// Page number
-				$this->Cell(0,10,'Seite '.$this->PageNo().'/{nb}',0,0,'C');
+				// Seitenzahl
+				$this->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Seite ').$this->PageNo().'/{nb}',0,1,'C');
+				$this->SetFont('Arial','',7);
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'Bankverbindung:'),0,0,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'Steuernummer: '),0,1,'');
+				$this->Ln(-3);				
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'Kreditinstitut'),0,1,'');
+				$this->Ln(-3);				
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'BLZ:   Konto-Nr.:'),0,1,'');
+				$this->Ln(-3);
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'IBAN:   BIC:'),0,1,'');
 			}
 		}
 
