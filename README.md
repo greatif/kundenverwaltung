@@ -1,7 +1,7 @@
 # Kundenverwaltung for REDAXO
 This addon offers a simple customer management.
 
-![kundenverwaltung](IMG.png)
+![kundenverwaltung](https://user-images.githubusercontent.com/8527203/51386797-05b48500-1b24-11e9-9778-02876eae4e2d.png)
 
 ## Features
 
