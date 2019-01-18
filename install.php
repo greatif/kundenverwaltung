@@ -42,6 +42,12 @@ rex_sql_table::get(rex::getTable('kunden_rechnungen'))
     ->ensureColumn(new rex_sql_column('paystatus', 'text'))
     ->ensure();
 
+rex_sql_table::get(rex::getTable('yform_field'))
+    ->ensurePrimaryIdColumn()
+    ->ensureColumn(new rex_sql_column('choices', 'text'))
+    ->ensureColumn(new rex_sql_column('precision', 'text'))
+    ->ensure();
+
 // install data entries
 $sql = rex_sql::factory();
 
