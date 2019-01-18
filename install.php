@@ -47,6 +47,7 @@ rex_sql_table::get(rex::getTable('yform_field'))
     ->ensureColumn(new rex_sql_column('choices', 'text'))
     ->ensureColumn(new rex_sql_column('precision', 'text'))
     ->ensureColumn(new rex_sql_column('unit', 'text'))
+    ->ensureColumn(new rex_sql_column('placeholder', 'text'))
     ->alter();
 
 // install data entries
