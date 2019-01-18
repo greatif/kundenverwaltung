@@ -145,7 +145,7 @@ if ($yform->objparams['actions_executed']) {
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);
-$fragment->setVar('title', 'Kunde: '.$kundenname.' - Rechnung vom '.$rechnungsdatum.' - Rechnungsbetrag: '.$rechnung['invoiceamount'].' - '.$rechnung['status']);
+$fragment->setVar('title', 'Kunde: '.$kundenname.' - Rechnung vom '.$rechnungsdatum.' - Rechnungsbetrag: € '.$rechnung['invoiceamount'].' - '.$rechnung['status']);
 $fragment->setVar('body', $form, false);
 $form = $fragment->parse('core/page/section.php');
 
