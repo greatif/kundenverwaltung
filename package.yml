@@ -15,7 +15,7 @@ page:
             yformTable: rex_kunden
             yformClass: kunden-yform
         rechnungsdaten:
-            title: 'Rechnungsdatendaten'
+            title: 'Rechnungsdaten'
             icon: rex-icon fa-book
             subPath: pages/data_edit.php
             yformTable: rex_kunden_rechnungen
