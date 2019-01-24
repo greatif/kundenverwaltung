@@ -42,8 +42,14 @@ rex_sql_table::get(rex::getTable('kunden_rechnungen'))
     ->ensureColumn(new rex_sql_column('paystatus', 'text'))
     ->ensure();
 
+rex_sql_table::get(rex::getTable('yform_table'))
+    ->ensurePrimaryIdColumn()
+    ->ensureColumn(new rex_sql_column('schema_overwrite', 'tinyint(1)', false, '1'))
+    ->alter();
+
 rex_sql_table::get(rex::getTable('yform_field'))
     ->ensurePrimaryIdColumn()
+    ->ensureColumn(new rex_sql_column('db_type', 'varchar(191)'))
     ->ensureColumn(new rex_sql_column('choices', 'text'))
     ->ensureColumn(new rex_sql_column('precision', 'text'))
     ->ensureColumn(new rex_sql_column('unit', 'text'))
