@@ -3,6 +3,13 @@
 $_csrf_key = 'rechnungsausgabe';
 $page = rex_request('page', 'string', '');
 
+	$rechnungssteller = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_rechnungssteller');
+	if ($rechnungssteller == '') {$rechnungssteller = 'Name / Firma';}
+	$strasse = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_strasse');
+	if ($strasse == '') {$strasse = 'Musterstraße 1';}	
+	$ort = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_plz-ort');
+	if ($ort == '') {$ort = '12345 Musterstadt';}	
+
 	$rechnungen = rex_sql::factory()->getArray('SELECT id, billnumber, ordernumber, customernumber, date, articles, invoiceamount, status FROM rex_kunden_rechnungen ORDER BY id DESC');
 	if (count($rechnungen)) {
         foreach ($rechnungen as $rechnung) {
@@ -15,7 +22,7 @@ $page = rex_request('page', 'string', '');
 				$kundenname = $kunde['salutation'].' '.$kunde['firstname'].' '.$kunde['name'];
 			}
 			$artikel = $rechnung['articles'];
-			
+	
 $yform = new rex_yform();
 $yform->setHiddenField('page', $page);
 $yform->setObjectparams('real_field_names', true);
@@ -28,6 +35,7 @@ if ($yform->objparams['actions_executed']) {
 			
     try {
 
+
 	//PDF-Generierung
 	$pdf = new FPDF('P','mm','A4');
 	define('EURO', chr(128) );
@@ -36,38 +44,64 @@ if ($yform->objparams['actions_executed']) {
 			// page header
 			function Header()
 			{
+				$rechnungssteller = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_rechnungssteller');
+				if ($rechnungssteller == '') {$rechnungssteller = 'BITTE DATEN EINGEBEN!';}
+				$strasse = 'Straße';
+				$strasse = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_strasse');
+				if ($strasse == '') {$strasse = 'Musterstraße 1';}
+				$ort = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_plz-ort');
+				if ($ort == '') {$ort = '12345 Musterstadt';}
+				$telefon = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_telefon');
+				if ($telefon == '') {$telefon = '012 / 34 56 78';}
+				$email = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_email');
+				if ($email == '') {$email = 'kontakt@email.de';}
+				$internet = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_internet');
+				if ($internet == '') {$internet = 'http://';}
+				$logo = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_logo');
 				// Logo
-				// $this->Image(rex_path::media('[LOGO].png'),145,6,25);
+				if ($logo != '') { $this->Image(rex_path::media($logo),145,6,25); }
 				// Schrift
 				$this->SetFont('Arial','B',11);
 				// Move to the right
 				$this->Cell(125,18,'',0,1);
 				$this->Cell(125,6,'',0,0);
 				// Title
-				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', 'Firmenname'),0,1,'');
+				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', $rechnungssteller),0,1,'');
 				$this->SetFont('Arial','B',9);
 				$this->Cell(125,6,'',0,0);
-				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', 'Straße'),0,1,'');
+				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', $strasse),0,1,'');
 				$this->Ln(-2);
 				$this->Cell(125,6,'',0,0);
-				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', 'PLZ und Ort'),0,1,'');
+				$this->Cell(50,6,iconv('UTF-8', 'windows-1252', $ort),0,1,'');
 				$this->Ln(-1);
 				$this->Cell(125,6,'',0,0);
 				$this->Cell(15,6,iconv('UTF-8', 'windows-1252', 'Tel.:'),0,0,'');
-				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', '0815 / 4711'),0,1,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', $telefon),0,1,'');
 				$this->Ln(-2);
 				$this->Cell(125,6,'',0,0);
 				$this->Cell(15,6,iconv('UTF-8', 'windows-1252', 'E-Mail:'),0,0,'');
-				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'kontakt@mail.de'),0,1,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', $email),0,1,'');
 				$this->Ln(-2);
 				$this->Cell(125,6,'',0,0);
 				$this->Cell(15,6,iconv('UTF-8', 'windows-1252', 'Internet:'),0,0,'');
-				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'https://github.com/greatif'),0,1,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', $internet),0,1,'');
 				$this->Ln(1);
 			}
 			// Page footer
 			function Footer()
 			{
+				$steuernummer = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_steuernummer');
+				if ($steuernummer == '') {$steuernummer = '0815-4711';}
+				$kreditinstitut = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_kreditinstitut');
+				if ($kreditinstitut == '') {$kreditinstitut = 'Muster Bank';}
+				$bankleitzahl = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_bankleitzahl');
+				if ($bankleitzahl == '') {$bankleitzahl = '1234567';}
+				$kontonummer = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_kontonummer');
+				if ($kontonummer == '') {$kontonummer = '1234567890';}
+				$iban = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_iban');
+				if ($iban == '') {$iban = 'DE 1234 5678 9012 34';}
+				$bic = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_bic');
+				if ($bic == '') {$bic = 'MB1234XXX';}
 				// Position at 1.5 cm from bottom
 				$this->SetY(-25);
 				// Schrift
@@ -76,13 +110,13 @@ if ($yform->objparams['actions_executed']) {
 				$this->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Seite ').$this->PageNo().'/{nb}',0,1,'C');
 				$this->SetFont('Arial','',7);
 				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'Bankverbindung:'),0,0,'');
-				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'Steuernummer: '),0,1,'');
+				$this->Cell(25,6,iconv('UTF-8', 'windows-1252', 'Steuernummer: '.$steuernummer),0,1,'');
 				$this->Ln(-3);				
-				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'Kreditinstitut'),0,1,'');
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', $kreditinstitut),0,1,'');
 				$this->Ln(-3);				
-				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'BLZ:   Konto-Nr.:'),0,1,'');
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'BLZ: '.$bankleitzahl.'   Konto-Nr.:'.$kontonummer),0,1,'');
 				$this->Ln(-3);
-				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'IBAN:   BIC:'),0,1,'');
+				$this->Cell(125,6,iconv('UTF-8', 'windows-1252', 'IBAN: '.$iban.'   BIC: '.$bic),0,1,'');
 			}
 		}
 
@@ -92,7 +126,7 @@ if ($yform->objparams['actions_executed']) {
 		$pdf->SetLeftMargin(20);
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','BU',7);
-		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', 'Firmenname - Straße - PLZ und Ort'),0,0);
+		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $rechnungssteller.' - '.$strasse.' - '.$ort),0,0);
 		$pdf->SetFont('Arial','B',9);
 		$pdf->Cell(40,6,$rechnungsdatum,0,1,'');
 		$pdf->SetFont('Arial','',11);
