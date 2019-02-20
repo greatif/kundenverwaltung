@@ -1,5 +1,5 @@
 package: kundenverwaltung
-version: '0.7.6'
+version: '0.7.7b'
 author: greatif
 supportpage: https://greatif.de
 
@@ -15,7 +15,7 @@ page:
             yformTable: rex_kunden
             yformClass: kunden-yform
         rechnungsdaten:
-            title: 'Rechnungsdaten'
+            title: 'Rechnungsdatendaten'
             icon: rex-icon fa-book
             subPath: pages/data_edit.php
             yformTable: rex_kunden_rechnungen
@@ -28,6 +28,10 @@ page:
             title: 'Export'
             icon: rex-icon fa-download
             subPath: pages/export.php
+        rechnungssteller:
+            title: 'Rechnungssteller'
+            icon: rex-icon fa-user
+            subPath: pages/rechnungssteller.php
         hilfe:
             title: 'Hilfe'
             icon: rex-icon fa-info
@@ -35,5 +39,6 @@ page:
 
 requires:
     packages:
-        yform: '>=3.0-beta6'
+        yform: '^3.0'
     redaxo: '^5.6.0'
+
