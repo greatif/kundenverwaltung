@@ -1,0 +1,16 @@
+kundenverwaltung_title = Daten des Rechnungsstellers
+kundenverwaltung_setting = Einstellungen
+kundenverwaltung_rechnungssteller = Vorname Name / Firmenname
+kundenverwaltung_strasse = Straße und Haus-Nr.
+kundenverwaltung_plz-ort = Postleitzahl und Ort
+kundenverwaltung_telefon = Telefon-Nr.
+kundenverwaltung_email = E-Mail-Adresse
+kundenverwaltung_internet = Internet-Adresse
+kundenverwaltung_steuernummer = Steuer-Nr.
+kundenverwaltung_kreditinstitut = Kreditinstitut
+kundenverwaltung_bankleitzahl = BLZ
+kundenverwaltung_kontonummer = Konto-Nr.
+kundenverwaltung_iban = IBAN
+kundenverwaltung_bic = BIC
+kundenverwaltung_logo = Firmen-Logo
+kundenverwaltung_save = Speichern
