@@ -26,140 +26,144 @@ $content .= '
 <form action="' . rex_url::currentBackendPage() . '" method="post" id="kundenverwaltung_settings">
     <fieldset>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_rechnungssteller") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_rechnungssteller") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_rechnungssteller" name="config[kundenverwaltung_rechnungssteller]" placeholder="Vorname Name / Firmenname" value="';
 					$content .= $this->getConfig('kundenverwaltung_rechnungssteller');
 					$content .= '" />
 				</dd>
         </dl>
 		
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_strasse") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_strasse") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_strasse" name="config[kundenverwaltung_strasse]" placeholder="Straße und Haus-Nr." value="';
 					$content .= $this->getConfig('kundenverwaltung_strasse');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_plz-ort") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_plz-ort") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_plz-ort" name="config[kundenverwaltung_plz-ort]" placeholder="Postleitzahl und Ort" value="';
 					$content .= $this->getConfig('kundenverwaltung_plz-ort');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_telefon") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_telefon") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_telefon" name="config[kundenverwaltung_telefon]" placeholder="Telefon-Nr." value="';
 					$content .= $this->getConfig('kundenverwaltung_telefon');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_email") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_email") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_email" name="config[kundenverwaltung_email]" placeholder="E-Mail-Adresse" value="';
 					$content .= $this->getConfig('kundenverwaltung_email');
 					$content .= '" />
 				</dd>
         </dl>
 		
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_internet") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_internet") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_internet" name="config[kundenverwaltung_internet]" placeholder="Internet-Adresse" value="';
 					$content .= $this->getConfig('kundenverwaltung_internet');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_steuernummer") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_steuernummer") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_steuernummer" name="config[kundenverwaltung_steuernummer]" placeholder="Steuer-Nr." value="';
 					$content .= $this->getConfig('kundenverwaltung_steuernummer');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_kreditinstitut") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_kreditinstitut") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_kreditinstitut" name="config[kundenverwaltung_kreditinstitut]" placeholder="Kreditinstitut" value="';
 					$content .= $this->getConfig('kundenverwaltung_kreditinstitut');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_bankleitzahl") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_bankleitzahl") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_bankleitzahl" name="config[kundenverwaltung_bankleitzahl]" placeholder="BLZ" value="';
 					$content .= $this->getConfig('kundenverwaltung_bankleitzahl');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_kontonummer") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_kontonummer") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_kontonummer" name="config[kundenverwaltung_kontonummer]" placeholder="Konto-Nr." value="';
 					$content .= $this->getConfig('kundenverwaltung_kontonummer');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_iban") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_iban") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_iban" name="config[kundenverwaltung_iban]" placeholder="IBAN" value="';
 					$content .= $this->getConfig('kundenverwaltung_iban');
 					$content .= '" />
 				</dd>
         </dl>
 
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_bic") . '</dt>
-				<dd>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_bic") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
 					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_bic" name="config[kundenverwaltung_bic]" placeholder="BIC" value="';
 					$content .= $this->getConfig('kundenverwaltung_bic');
 					$content .= '" />
 				</dd>
         </dl>
 		
-        <dl class="rex-form-group form-group">
-			<dt>' . $this->i18n("kundenverwaltung_logo") . '</dt>
-				<dd>
-					<input class="form-control" type="text" name="config[kundenverwaltung_logo]" value="' . $this->getConfig('kundenverwaltung_logo') . '" id="REX_MEDIA_1" readonly="readonly"';
-					$content .= $this->getConfig('kundenverwaltung_logo');
-					$content .= '" />		
-					<span class="input-group-btn">
-						<a href="#" class="btn btn-popup" onclick="openREXMedia(1);return false;" title="Öffnen">
-							<i class="rex-icon rex-icon-open-mediapool"></i>
-						</a>
-						<a href="#" class="btn btn-popup" onclick="addREXMedia(1);return false;" title="Neu">
-							<i class="rex-icon rex-icon-add-media"></i>
-						</a>
-						<a href="#" class="btn btn-popup" onclick="deleteREXMedia(1);return false;" title="Entfernen">
-							<i class="rex-icon rex-icon-delete-media"></i>
-						</a>
-						<a href="#" class="btn btn-popup" onclick="viewREXMedia(1);return false;" title="Ansehen">
-							<i class="rex-icon rex-icon-view-media"></i>
-						</a>
-					</span>
+        <dl>
+			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_logo") . '</dt>
+				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">			
+					<div lass="rex-form-container-field">
+						<div class="rex-js-widget rex-js-widget-media">
+							<div class="input-group">
+								<input class="form-control" type="text" name="config[kundenverwaltung_logo]" value="' . $this->getConfig('kundenverwaltung_logo') . '" id="REX_MEDIA_1" readonly="readonly">
+								<span class="input-group-btn">
+									<a href="#" class="btn btn-popup" onclick="openREXMedia(1);return false;" title="Öffnen">
+										<i class="rex-icon rex-icon-open-mediapool"></i>
+									</a>
+									<a href="#" class="btn btn-popup" onclick="addREXMedia(1);return false;" title="Neu">
+										<i class="rex-icon rex-icon-add-media"></i>
+									</a>
+									<a href="#" class="btn btn-popup" onclick="deleteREXMedia(1);return false;" title="Entfernen">
+										<i class="rex-icon rex-icon-delete-media"></i>
+									</a>
+									<a href="#" class="btn btn-popup" onclick="viewREXMedia(1);return false;" title="Ansehen">
+										<i class="rex-icon rex-icon-view-media"></i>
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
 				</dd>
 		</dl>
 
-        <dl class="rex-form-group form-group">
-            <dd>
-                <button class="btn btn-save" type="submit" name="config-submit" value="1" title="' . $this->i18n('com_auth_config_save') . '">' . $this->i18n('kundenverwaltung_save') . '</button>
+        <dl>
+            <dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                <button class="btn btn-save" type="submit" name="config-submit" value="1" title="' . $this->i18n('kundenverwaltung_save') . '">' . $this->i18n('kundenverwaltung_save') . '</button>
             </dd>
         </dl>
 
@@ -177,31 +181,14 @@ echo $fragment->parse('core/page/section.php');
 
 <style>
 
-    #kundenverwaltung_settings label 
-    {
-        padding-left: 0;
-    }
-
-    #kundenverwaltung_settings input 
-    {
-        margin-left: 0;
-        position: relative;
-    }
-
     #kundenverwaltung_settings input[type=text]
     {
         margin-top: 5px;
-        width: 500px;
     }
 
-    #kundenverwaltung_settings i 
+    #kundenverwaltung_settings span a
     {
-        color: #888888;
-    }
-
-    #kundenverwaltung_settings b
-    {
-        color: red;
+        margin-top: 5px;
     }
 
 </style>
