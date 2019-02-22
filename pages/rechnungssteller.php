@@ -137,7 +137,7 @@ $content .= '
         <dl>
 			<dt class="col-lg-2 col-md-4 col-sm-4 col-xs-12">' . $this->i18n("kundenverwaltung_logo") . '</dt>
 				<dd class="col-lg-10 col-md-8 col-sm-8 col-xs-12">			
-					<div lass="rex-form-container-field">
+					<div class="rex-form-container-field">
 						<div class="rex-js-widget rex-js-widget-media">
 							<div class="input-group">
 								<input class="form-control" type="text" name="config[kundenverwaltung_logo]" value="' . $this->getConfig('kundenverwaltung_logo') . '" id="REX_MEDIA_1" readonly="readonly">
