@@ -8,15 +8,18 @@ $page = rex_request('page', 'string', '');
 	$strasse = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_strasse');
 	if ($strasse == '') {$strasse = 'Musterstraße 1';}	
 	$ort = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_plz-ort');
-	if ($ort == '') {$ort = '12345 Musterstadt';}	
+	if ($ort == '') {$ort = '12345 Musterstadt';}
+	$gewerbeart = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_gewerbeart');
+	$hinweise = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_hinweise');
 
-	$rechnungen = rex_sql::factory()->getArray('SELECT id, billnumber, ordernumber, customernumber, date, articles, invoiceamount, status FROM rex_kunden_rechnungen ORDER BY id DESC');
+	$rechnungen = rex_sql::factory()->getArray('SELECT id, billnumber, ordernumber, customernumber, date, performanceperiod, articles, invoiceamount, status FROM rex_kunden_rechnungen ORDER BY id DESC');
 	if (count($rechnungen)) {
         foreach ($rechnungen as $rechnung) {
 			$rechnungsnummer = $rechnung['billnumber'];
 			$rechnungsdatum = date('d.m.Y', strtotime($rechnung['date']));
 			$auftragsnummer = $rechnung['ordernumber'];
 			$kundennummer = $rechnung['customernumber'];
+			$leistungszeitraum = $rechnung['performanceperiod'];
 			$kundendaten = rex_sql::factory()->getArray("SELECT * FROM rex_kunden WHERE customernumber = '$kundennummer'");
 			foreach ($kundendaten as $kunde) {
 				$kundenname = $kunde['salutation'].' '.$kunde['firstname'].' '.$kunde['name'];
@@ -136,14 +139,19 @@ if ($yform->objparams['actions_executed']) {
 		$pdf->Cell(125,6,iconv('UTF-8', 'windows-1252', $kunde['country']),0,1);
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','B',11);
-		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Rechnung Nr. :'),0,0);
+		$pdf->Cell(40,6,iconv('UTF-8', 'windows-1252', 'Rechnung Nr. :'),0,0);
 		$pdf->Cell(0,6,$rechnungsnummer,0,1);
 		$pdf->Ln(-2);
-		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Auftrag Nr. :'),0,0);
+		$pdf->Cell(40,6,iconv('UTF-8', 'windows-1252', 'Auftrag Nr. :'),0,0);
 		$pdf->Cell(0,6,$auftragsnummer,0,1);
 		$pdf->Ln(-2);
-		$pdf->Cell(35,6,iconv('UTF-8', 'windows-1252', 'Kundennr. :'),0,0);
+		$pdf->Cell(40,6,iconv('UTF-8', 'windows-1252', 'Kundennr. :'),0,0);
 		$pdf->Cell(0,6,$kundennummer,0,1);
+		if ($leistungszeitraum != '') {
+			$pdf->Ln(-2);
+			$pdf->Cell(40,6,iconv('UTF-8', 'windows-1252', 'Leistungszeitraum :'),0,0);
+			$pdf->Cell(0,6,$leistungszeitraum,0,1);
+		}
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','B',11);	
 		$pdf->SetFillColor(225, 225, 225);
@@ -157,9 +165,12 @@ if ($yform->objparams['actions_executed']) {
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','',9);		
 		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'HINWEISE:'),0,1);
-		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Bitte beachten Sie, dass für Artikel, die auf Ihren Vorgaben basierend produziert werden, kein Widerrufsrecht besteht.'),0,1);
-		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Soweit nicht anders angegeben, entspricht das Liefer-/Leistungsdatum dem Rechnungsdatum.'),0,1);
-		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Gemäß § 19 Abs. 1 UStG wird keine Umsatzsteuer ausgewiesen.'),0,1);
+		if ($hinweise != '') {
+			$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', $hinweise),0,1);
+		}
+		if ($gewerbeart == 'kleingewerbe') {
+			$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Gemäß § 19 Abs. 1 UStG wird keine Umsatzsteuer ausgewiesen.'),0,1);
+		}
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','B',9);
 		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', 'Wir bedanken uns für Ihren Auftrag!'),0,1);
