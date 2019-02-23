@@ -12,4 +12,6 @@ kundenverwaltung_kontonummer = Konto-Nr.
 kundenverwaltung_iban = IBAN
 kundenverwaltung_bic = BIC
 kundenverwaltung_logo = Firmen-Logo
+kundenverwaltung_gewerbeart = Gewerbeart
+kundenverwaltung_hinweise = Rechnungshinweise
 kundenverwaltung_save = Speichern
