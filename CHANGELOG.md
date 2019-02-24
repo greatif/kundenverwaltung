@@ -15,7 +15,6 @@ Version 0.7.8b – 24.02.2019
 * Individuelle Rechnungshinweise können eingegeben werden
 
 
-### Neue Features
-
+### ToDo's
 * Rechnungsausgabe für umsatzsteuerpflichtige Gewerbe weiter anpassen
 * Zwischenrechnungen ermöglichen
