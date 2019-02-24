@@ -18,7 +18,8 @@ if (rex_post('config-submit', 'boolean'))
 		['kundenverwaltung_bic', 'string'],
 		['kundenverwaltung_logo', 'string'],
 		['kundenverwaltung_gewerbeart', 'string'],
-		['kundenverwaltung_hinweise', 'string']
+		['kundenverwaltung_hinweise', 'string'],
+		['kundenverwaltung_umsatzsteuersatz', 'string']
     ]));
 
     $content .= rex_view::info('Änderung gespeichert');
@@ -190,7 +191,17 @@ $fragment = new rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/form.php');
 
-    $content .= '</fieldset>    
+    $content .= '
+	    <dl class="rex-form-group form-group">
+			<dt><label for="' . $this->i18n("kundenverwaltung_umsatzsteuersatz") . '">' . $this->i18n("kundenverwaltung_umsatzsteuersatz") . '</label></dt>
+				<dd>
+					<input class="rex-form-text form-control" type="text" id="rex-form-kundenverwaltung_umsatzsteuersatz" name="config[kundenverwaltung_umsatzsteuersatz]" placeholder="ohne %-Zeichen" value="';
+					$content .= $this->getConfig('kundenverwaltung_umsatzsteuersatz');
+					$content .= '" />
+				</dd>
+        </dl>
+	
+	</fieldset>    
 
 </div>';
 
