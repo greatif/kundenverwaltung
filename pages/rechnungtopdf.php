@@ -11,6 +11,8 @@ $page = rex_request('page', 'string', '');
 	if ($ort == '') {$ort = '12345 Musterstadt';}
 	$gewerbeart = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_gewerbeart');
 	$hinweise = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_hinweise');
+	$umsatzsteuersatz = rex_addon::get('kundenverwaltung')->getConfig('kundenverwaltung_umsatzsteuersatz');
+	if ($umsatzsteuersatz == '') {$umsatzsteuersatz = '0';}
 
 	$rechnungen = rex_sql::factory()->getArray('SELECT id, billnumber, ordernumber, customernumber, date, performanceperiod, articles, invoiceamount, status FROM rex_kunden_rechnungen ORDER BY id DESC');
 	if (count($rechnungen)) {
@@ -158,10 +160,26 @@ if ($yform->objparams['actions_executed']) {
 		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Leistungen / Artikel'),1,1,'',1);
 		$pdf->SetFont('Arial','',11);
 		$pdf->MultiCell(0,6,iconv('UTF-8', 'windows-1252', $artikel),1,1);
-		$pdf->SetFont('Arial','B',11);	
-		$pdf->SetFillColor(225, 225, 225);
-		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Rechnungsbetrag'),'UBL',0,'',1);
-		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', '€ ').$rechnung['invoiceamount'],'UBR',1,'R',1);
+		if ($gewerbeart == 'kleingewerbe') {
+			$pdf->SetFont('Arial','B',11);	
+			$pdf->SetFillColor(225, 225, 225);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Rechnungsbetrag'),'UBL',0,'',1);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', '€ ').$rechnung['invoiceamount'],'UBR',1,'R',1);
+		}
+		if ($gewerbeart == 'gewerbe') {
+			$pdf->SetFont('Arial','',11);	
+			$pdf->SetFillColor(255, 255, 255);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Nettobetrag'),'UBL',0,'',1);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', '€ ').$rechnung['invoiceamount'],'UBR',1,'R',1);
+			$umsatzsteuerbetrag = $rechnung['invoiceamount'] * ($umsatzsteuersatz / 100);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Umsatzsteuersatz: '.$umsatzsteuersatz.'%'),'UBL',0,'',1);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', '€ ').$umsatzsteuerbetrag,'UBR',1,'R',1);
+			$bruttobetrag = $rechnung['invoiceamount'] + $umsatzsteuerbetrag;
+			$pdf->SetFont('Arial','B',11);
+			$pdf->SetFillColor(225, 225, 225);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'Gesamtbetrag'),'UBL',0,'',1);
+			$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', '€ ').$bruttobetrag,'UBR',1,'R',1);
+		}
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','',9);		
 		$pdf->Cell(0,6,iconv('UTF-8', 'windows-1252', 'HINWEISE:'),0,1);
