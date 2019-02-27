@@ -24,8 +24,6 @@ rex_sql_table::get(rex::getTable('kunden'))
     ->ensureColumn(new rex_sql_column('status', 'text'))
     ->ensureColumn(new rex_sql_column('remarks', 'text'))
     ->ensureColumn(new rex_sql_column('password', 'varchar(191)'))
-    ->ensureColumn(new rex_sql_column('companyname', 'varchar(191)'))
-    ->ensureColumn(new rex_sql_column('place', 'varchar(191)'))
     ->ensure();
 
 rex_sql_table::get(rex::getTable('kunden_rechnungen'))
