@@ -1,7 +1,16 @@
 Changelog
 =========
 
-Version 0.7.8b – 24.02.2019
+Version 0.7.9-beta – 27.02.2019
+--------------------------
+
+#### Bitte Installationshinweise beachten.
+
+### Neue Features
+
+* Daten-Export in mehreren Formaten _(CSV,JSON,SQL)_ möglich
+
+Version 0.7.8-beta – 24.02.2019
 --------------------------
 
 #### Bitte Installationshinweise beachten.
