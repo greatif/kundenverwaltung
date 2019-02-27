@@ -69,7 +69,7 @@ if (rex_post('export', 'bool')) {
 		// JSON Export (ohne Tabellenstruktur)
 
         ob_end_clean();
-		$filename = 'export_kundendaten_rechnungen_ohne_datenbank-struktur'.date('Y-m-d_H-i-s').'.json';
+		$filename = 'export_kundendaten_rechnungen_ohne_datenbank-struktur'.date('Y-m-d_H-i-s');
         header('Content-Type: application/json');
         header('Content-Disposition: attachment; filename="' . $filename . '.json"');
         echo json_encode($qryArray, JSON_UNESCAPED_UNICODE);
@@ -82,7 +82,7 @@ if (rex_post('export', 'bool')) {
         // CSV Export
 
         ob_end_clean();
-		$filename = 'export_kundendaten_rechnungen_'.date('Y-m-d_H-i-s').'.json';
+		$filename = 'export_kundendaten_rechnungen_'.date('Y-m-d_H-i-s');
         header('Content-Type: application/excel');
         header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
         $file = fopen('php://output', 'w');
