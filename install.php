@@ -38,7 +38,6 @@ rex_sql_table::get(rex::getTable('kunden_rechnungen'))
     ->ensureColumn(new rex_sql_column('articles', 'text'))
     ->ensureColumn(new rex_sql_column('notes', 'text'))
     ->ensureColumn(new rex_sql_column('status', 'text'))
-    ->ensureColumn(new rex_sql_column('paystatus', 'text'))
     ->ensure();
 
 rex_sql_table::get(rex::getTable('yform_field'))
