@@ -1,10 +1,17 @@
 Changelog
 =========
 
-Version 0.7.9-beta – 27.02.2019
+#### Bitte Installationshinweise beachten.
+
+Version 0.8.0-beta – 20.03.2019
 --------------------------
 
-#### Bitte Installationshinweise beachten.
+### Neue Features
+
+* Daten-Import hinzugefügt
+
+Version 0.7.9-beta – 27.02.2019
+--------------------------
 
 ### Neue Features
 
@@ -12,8 +19,6 @@ Version 0.7.9-beta – 27.02.2019
 
 Version 0.7.8-beta – 24.02.2019
 --------------------------
-
-#### Bitte Installationshinweise beachten.
 
 ### Neue Features
 
