@@ -26,3 +26,7 @@ kundenverwaltung_rechnungen_json = JSON: Rechnungsdaten
 kundenverwaltung_sql = SQL: Kunden- und Rechnungsdaten mit Tabellenstruktur
 kundenverwaltung_export_save = Exportieren
 kundenverwaltung_export_failed = Export fehlgeschlagen
+kundenverwaltung_import = Kunden- und Rechnungsdaten importieren
+kundenverwaltung_import_backup-file = SQL-Backup-Datei auswählen
+kundenverwaltung_import_backup-file_button = Backup importieren
+kundenverwaltung_import_backup-file_proceed = Daten werden nun importiert
