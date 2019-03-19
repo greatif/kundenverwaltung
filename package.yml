@@ -1,5 +1,5 @@
 package: kundenverwaltung
-version: '0.7.9-beta'
+version: '0.8.0-beta'
 author: greatif
 supportpage: https://greatif.de
 
@@ -26,8 +26,12 @@ page:
             subPath: pages/rechnungtopdf.php
         export:
             title: 'Export'
-            icon: rex-icon fa-download
+            icon: rex-icon fa-upload
             subPath: pages/export.php
+        import:
+            title: 'Import'
+            icon: rex-icon fa-download
+            subPath: pages/import.php
         rechnungssteller:
             title: 'Rechnungssteller'
             icon: rex-icon fa-user
@@ -41,4 +45,3 @@ requires:
     packages:
         yform: '^3.0'
     redaxo: '^5.6.0'
-
