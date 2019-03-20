@@ -1,8 +1,6 @@
 Changelog
 =========
 
-#### Bitte Installationshinweise beachten.
-
 Version 0.8.0-beta – 20.03.2019
 --------------------------
 
