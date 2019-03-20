@@ -13,10 +13,6 @@ This addon offers a simple customer management.
 - PDF output for invoices
 - export function for customer data and invoices
 
-## Installation
-
-- clear REDAXO-Cache after installation
-
 ## Requirements
 
 - YForm 3.0
