@@ -12,10 +12,6 @@ Das AddOn stellt eine einfache Kundenverwaltung zur Verfügung.
 - PDF-Ausgabe für Rechnungen
 - Exportfunktion für Kundendaten und Rechnungen
 
-## Installation
-
-- REDAXO-Cache nach der Installation löschen
-
 ## Voraussetzungen
 
 - YForm 3.0
