@@ -11,7 +11,7 @@ This addon offers a simple customer management.
 - scope of collected data can be extended individually via YForm
 - search function
 - PDF output for invoices
-- export function for customer data and invoices
+- export/import function for customer data and invoices
 
 ## Requirements
 
