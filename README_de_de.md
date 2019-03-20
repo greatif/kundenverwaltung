@@ -10,7 +10,7 @@ Das AddOn stellt eine einfache Kundenverwaltung zur Verfügung.
 - Umfang der erfassten Daten über YForm individuell erweiterbar
 - Suchfunktion
 - PDF-Ausgabe für Rechnungen
-- Exportfunktion für Kundendaten und Rechnungen
+- Export/Import-Funktion für Kundendaten und Rechnungen
 
 ## Voraussetzungen
 
